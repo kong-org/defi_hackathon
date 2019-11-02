@@ -18,10 +18,18 @@ from the root folder. You'll want to make sure that Truffle is installed globall
 
 Compile (`truffle compile`) the current version of the contracts so the folder `build` is present in the root directory.
 
+## Kong ID Information.
+
+The `deployment/json` directory contains JSON files for all of the KONG IDs provided at the DeFi hackathon. These files include the public key coorindates as well as the printed ID number and can be used in conjunction with the `deployEscrow.js` script. Find your Kong ID by searching for the corresponding `count`.
+
+These JSON blobs contain the default claim date for Kong notes manufactured in October 2019 as an UNIX epoch timestamp. Depending on your application you may or may not want a claim date. If you are parsing the JSON file in a similar way for the asset that you plan to escrow, you may wish to alter this claim date.
+
+Make sure to keep the primary public key (it's hash and x, y coordinates) as it's required for validating signatures. The other keys are Kong cash specific and may not be relevant for your application.
+
 ## Deploy.
 
-Use the scripts present in `deployment` to deploy your escrow contract.
+Use the `deployEscrow.js` file present in `deployment` to deploy your escrow contract. Depending on additional parameters required for your asset you may need to modify this script.
 
-## JSON.
+## Notes.
 
-The JSON directory contains blobs for all of the KONG IDs provided at the DeFi hackathon. These JSON blobs include the public key coorindates as well as the printed ID number and can be used in conjunction with the `deployEscrow.js` script.
+This repository is intended as a stub and does not contain testing scripts for the Kong escrow contract.

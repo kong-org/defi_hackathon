@@ -99,37 +99,37 @@ var Escrow = new web3.eth.Contract(compiledEscrowContract['abi']);
             var serializedTx = transaction.serialize();
 
             web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
-                    .on('confirmation', function (confirmationNumber, receipt) {
+                .on('confirmation', function (confirmationNumber, receipt) {
 
-                        jsonData['contractAddress'] = receipt.contractAddress;
-                        jsonData['contractName'] = compiledEscrowContract.contractName;
-                        jsonData['contractVersion'] = compiledEscrowContractVersion;
-                        jsonData['contractCompiler'] = compiledEscrowContract.compiler;
-                        jsonData['contractSource'] = compiledEscrowContract.source;
-                        jsonData['contractDeployedByteCode'] = compiledEscrowContract.deployedBytecode;
-                        jsonData['contractTransaction'] = receipt.transactionHash;
+                    jsonData['contractAddress'] = receipt.contractAddress;
+                    jsonData['contractName'] = compiledEscrowContract.contractName;
+                    jsonData['contractVersion'] = compiledEscrowContractVersion;
+                    jsonData['contractCompiler'] = compiledEscrowContract.compiler;
+                    jsonData['contractSource'] = compiledEscrowContract.source;
+                    jsonData['contractDeployedByteCode'] = compiledEscrowContract.deployedBytecode;
+                    jsonData['contractTransaction'] = receipt.transactionHash;
 
-                        // State / Parameters.
-                        jsonData['contractParameterEllipticCurveContractAddress'] = ellipticAddress;
-                        jsonData['contractParameterKongERC20ContractAddress'] = kongERC20Address;
+                    // State / Parameters.
+                    jsonData['contractParameterEllipticCurveContractAddress'] = ellipticAddress;
+                    jsonData['contractParameterKongERC20ContractAddress'] = kongERC20Address;
 
-                        // Store.
-                        fs.writeFile(`./deployment/json/${args.primaryHash}.json`, JSON.stringify(jsonData), 'utf8', (err, res) => {
+                    // Store.
+                    fs.writeFile(`./deployment/json/${args.primaryHash}.json`, JSON.stringify(jsonData), 'utf8', (err, res) => {
 
-                            if (!err) {
+                        if (!err) {
 
-                                console.log(`Successfully Deployed Escrow Contract (Contract Address ${receipt.contractAddress})`);
-                                process.exit();
+                            console.log(`Successfully Deployed Escrow Contract (Contract Address ${receipt.contractAddress})`);
+                            process.exit();
 
-                            } else if (err) {
+                        } else if (err) {
 
-                                console.log(err);
+                            console.log(err);
 
-                            }
-
-                        })
+                        }
 
                     })
+
+                })
 
         });
 
